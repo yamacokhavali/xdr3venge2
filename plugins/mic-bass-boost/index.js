@@ -1,55 +1,35 @@
-(() => {
-  var __defProp = Object.defineProperty;
-  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __getOwnPropNames = Object.getOwnPropertyNames;
-  var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __export = (target, all) => {
-    for (var name in all)
-      __defProp(target, name, { get: all[name], enumerable: true });
-  };
-  var __copyProps = (to, from, except, desc) => {
-    if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames(from))
-        if (!__hasOwnProp.call(to, key) && key !== except)
-          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+// plugins/mic-bass-boost/index.ts
+var audioCtx = null;
+var bassFilter = null;
+var lowPassFilter = null;
+var mic_bass_boost_default = {
+  onLoad: () => {
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass)
+        return;
+      audioCtx = new AudioContextClass();
+      bassFilter = audioCtx.createBiquadFilter();
+      bassFilter.type = "lowshelf";
+      bassFilter.frequency.value = 180;
+      bassFilter.gain.value = 25;
+      lowPassFilter = audioCtx.createBiquadFilter();
+      lowPassFilter.type = "lowpass";
+      lowPassFilter.frequency.value = 1200;
+      bassFilter.connect(lowPassFilter);
+      console.log("[MicBassBoost] Bo\u011Fuk & A\u011F\u0131r Bass Boost aktif edildi!");
+    } catch (e) {
+      console.error("[MicBassBoost] Hata:", e);
     }
-    return to;
-  };
-  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-  var plugin_exports = {};
-  __export(plugin_exports, {
-    default: () => plugin
-  });
-
-  var plugin = {
-    onLoad: () => {
-      try {
-        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContextClass) return;
-
-        const audioCtx = new AudioContextClass();
-
-        const bassFilter = audioCtx.createBiquadFilter();
-        bassFilter.type = "lowshelf";
-        bassFilter.frequency.value = 180;
-        bassFilter.gain.value = 25;
-
-        const lowPassFilter = audioCtx.createBiquadFilter();
-        lowPassFilter.type = "lowpass";
-        lowPassFilter.frequency.value = 1200;
-
-        bassFilter.connect(lowPassFilter);
-
-        console.log("[MicBassBoost] Bass Boost aktif!");
-      } catch (e) {
-        console.error("[MicBassBoost] Hata:", e);
-      }
-    },
-    onUnload: () => {
-      console.log("[MicBassBoost] Pasif!");
+  },
+  onUnload: () => {
+    if (audioCtx) {
+      audioCtx.close();
+      audioCtx = null;
     }
-  };
-
-  return __toCommonJS(plugin_exports);
-})();
+    console.log("[MicBassBoost] Eklenti kapat\u0131ld\u0131.");
+  }
+};
+export {
+  mic_bass_boost_default as default
+};
