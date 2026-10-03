@@ -3,5 +3,5 @@
   "description": "Boğuk ve ağır bass boost mikrofon efekti",
   "author": "yamacokhavali",
   "version": "1.0.0",
-  "main": "index.js"
+  "main": "./index.js"
 }
