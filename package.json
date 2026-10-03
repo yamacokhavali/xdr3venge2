@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "esbuild plugins/mic-bass-boost/index.ts --bundle --outfile=dist/mic-bass-boost.js --format=esm"
+    "build": "esbuild plugins/mic-bass-boost/index.ts --bundle --outfile=plugins/mic-bass-boost/index.js --format=esm"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
