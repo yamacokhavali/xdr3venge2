@@ -1,0 +1,15 @@
+{
+  "name": "xdr3venge2-plugins",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "revenge-plugin build",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "revenge-plugin": "latest",
+    "typescript": "^5.0.0"
+  }
+}
