@@ -1,12 +1,7 @@
 {
   "name": "Mic Bass Boost",
-  "description": "Discord mobil ses kanallarında ses çıkışını ve mikrofon dengesini ayarlamaya yardımcı olur.",
-  "authors": [
-    {
-      "name": "xdr3venge",
-      "id": "0"
-    }
-  ],
-  "main": "index.ts",
-  "version": "1.0.0"
+  "description": "Boğuk ve ağır bass boost mikrofon efekti",
+  "author": "yamacokhavali",
+  "version": "1.0.0",
+  "main": "index.js"
 }
